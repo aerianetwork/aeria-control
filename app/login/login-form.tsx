@@ -68,7 +68,12 @@ export function LoginForm({
               </Field>
 
               <Field>
-                <Button type="submit" formAction={action} disabled={pending}>
+                <Button
+                  type="submit"
+                  formAction={action}
+                  disabled={pending}
+                  className="hover:cursor-pointer"
+                >
                   {pending ? "Signing in…" : "Login"}
                 </Button>
               </Field>
