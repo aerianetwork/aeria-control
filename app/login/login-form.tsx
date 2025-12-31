@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { login } from "@/app/login/action";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Card,
@@ -15,6 +15,7 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
+import LoginButton from "@/components/login-button";
 
 export function LoginForm({
   className,
@@ -30,7 +31,7 @@ export function LoginForm({
           <CardDescription>Continue with your email account</CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form action={login}>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -53,9 +54,10 @@ export function LoginForm({
                 />
               </Field>
               <Field>
-                <Button type="submit" formAction={login}>
+                <LoginButton />
+                {/* <Button type="submit" formAction={login}>
                   Login
-                </Button>
+                </Button> */}
               </Field>
             </FieldGroup>
           </form>

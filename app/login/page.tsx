@@ -8,7 +8,7 @@ export default function LoginPage() {
         <div className="flex items-center gap-2 self-center font-medium">
           <div className="flex size-6 items-center justify-center rounded-md">
             <Image
-              src="https://majiiodyguuqfdlnfkou.supabase.co/storage/v1/object/public/Assets/Logo%20Aeria.png"
+              src="https://sqhjjnvpxhdpgoeggepb.supabase.co/storage/v1/object/public/Assets/Logo%20Aeria.png"
               alt="Logo Aeria Media Network"
               width={24}
               height={24}
