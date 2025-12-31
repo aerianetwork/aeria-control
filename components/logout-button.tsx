@@ -1,20 +1,24 @@
 "use client";
 
-import { useFormStatus } from "react-dom";
+import { useEffect, useActionState } from "react";
+import { toast } from "sonner";
+import { logout, type LogoutState } from "@/app/login/action";
 import { Button } from "@/components/ui/button";
-import { IconLogout } from "@tabler/icons-react";
+
+const initialState: LogoutState = {};
 
 export default function LogoutButton() {
-  const { pending } = useFormStatus();
+  const [state, action, pending] = useActionState(logout, initialState);
+
+  useEffect(() => {
+    if (state?.error) toast.warning(state.error);
+  }, [state]);
 
   return (
-    <Button
-      type="submit"
-      disabled={pending}
-      className="flex w-full items-center gap-2"
-    >
-      <IconLogout className="h-4 w-4" />
-      {pending ? "Logging out…" : "Log out"}
-    </Button>
+    <form>
+      <Button type="submit" formAction={action} disabled={pending}>
+        {pending ? "Logging out…" : "Log out"}
+      </Button>
+    </form>
   );
 }

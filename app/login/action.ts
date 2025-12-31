@@ -4,7 +4,18 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 
-export async function login(formData: FormData) {
+export type LoginState = {
+  error?: string
+}
+
+export type LogoutState = {
+  error?: string
+}
+
+export async function login(
+  _prevState: LoginState,
+  formData: FormData
+): Promise<LoginState> {
   const supabase = await createClient()
 
   const data = {
@@ -14,24 +25,18 @@ export async function login(formData: FormData) {
 
   const { error } = await supabase.auth.signInWithPassword(data)
 
-  if (error) {
-    console.log(error.message)
-    redirect('/login?error=invalid_login_credentials')
-  }
+  if (error) return { error: 'Email atau password salah' }
 
   revalidatePath('/', 'layout')
   redirect('/')
 }
 
-export async function logout() {
+export async function logout(): Promise<LogoutState> {
   const supabase = await createClient()
 
   const { error } = await supabase.auth.signOut()
 
-  if (error) {
-    console.log(error.message)
-    redirect('/?error=logout_failed')
-  }
+  if (error) return { error: 'Gagal logout, silakan coba lagi' }
 
   revalidatePath('/', 'layout')
   redirect('/login')
